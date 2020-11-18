@@ -3,28 +3,31 @@ const app = express();
 const jwt = require("jsonwebtoken");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const mongoose = require("mongoose");
-const { SECRET, DB_LINK, PORT } = require("./config/index");
+const { SECRET, PORT } = require("./config/index");
+const { dbInit } = require("./config/db");
+const authRoutes = require("./routes/users");
+const passport = require("passport")
+const userLoggedIn = require("./middlewares/userDecoded");
+
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-mongoose.connect(
-  DB_LINK,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  () => {
-    console.log("connected");
-  }
-);
+//database initialization
+dbInit();
 
 app.listen(PORT, () => {
-  console.log("connected");
+  console.log(`connecting on port ${PORT}`);
 });
 
-app.get("/", (req, res) => {
-  res.send("hello world");
-});
+app.use(passport.initialize());
+userLoggedIn(passport);
+//router links
+authRoutes(app);
+
+// test routes and middlewares
+// app.use(require("./middlewares/verifyUser"));
+// // app.use(require("./middlewares/verifyUserActivated"));
+// require("./routes/testRoute")(app);
+

@@ -1,5 +1,5 @@
 {
-  "name": "defaultapp",
+  "name": "SERVER",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,6 +17,7 @@
     "express": "^4.17.1",
     "express-validator": "^6.6.1",
     "helmet": "^4.2.0",
+    "ipware": "^2.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.14",
     "nodemon": "^2.0.6",

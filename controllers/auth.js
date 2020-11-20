@@ -1,8 +1,9 @@
 const User = require("../models/user");
-const {validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const {SECRET:secret} = require("../config/index");
+const { SECRET: secret } = require("../config/index");
+var getIP = require("ipware")().get_ip;
 //signup function
 const signUp = async (req, res) => {
   //check for validation error
@@ -28,13 +29,13 @@ const signUp = async (req, res) => {
       });
     }
     //username in use already
-      const usernamePicked = await User.findOne({ username: req.body.username });
-  if (usernamePicked) {
-    return res.status(400).send({
-      status: "error",
-      data: { message: "username already selected, choose another one" },
-    });
-  }
+    const usernamePicked = await User.findOne({ username: req.body.username });
+    if (usernamePicked) {
+      return res.status(400).send({
+        status: "error",
+        data: { message: "username already selected, choose another one" },
+      });
+    }
     //user does not exist so create one
     user = new User({
       username,
@@ -59,7 +60,7 @@ const signUp = async (req, res) => {
 
 //signIn function
 const signIn = async (req, res) => {
-    //check for validation error
+  //check for validation error
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({
@@ -109,17 +110,15 @@ const signIn = async (req, res) => {
       data: { message: "Invalid login credentials" },
     });
   }
-
 };
 
-
-const getAllUsers = async(req, res) => {
- const users = await User.find(); 
-   res.status(200).send({
-        status: "success",
-        data: users,
-      });
-}
+const getAllUsers = async (req, res) => {
+  const users = await User.find();
+  res.status(200).send({
+    status: "success",
+    data: users,
+  });
+};
 
 module.exports = {
   signUp,

@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 //database initialization
 dbInit();
 
-app.listen(PORT, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log(`connecting on port ${PORT}`);
 });
 

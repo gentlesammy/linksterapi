@@ -25,6 +25,7 @@ userLoggedIn(passport);
 //router links
 authRoutes(app);
 
+app.use("/api/v1/dashboard", require("./routes/Dashboard/Index"));
 //admin Routes
 app.use(require("./middlewares/verifyUser"));
 app.use(require("./middlewares/verifyAdmin"));

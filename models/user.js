@@ -1,5 +1,20 @@
 const { Schema, model } = require("mongoose");
 
+const profileSchema = new Schema(
+  {
+    thumbnail: {
+      type: String,
+      default: "default.jpg",
+    },
+
+    colorTheme: {
+      type: String,
+      enum: ["primaryBlue", "primaryGreen", "primaryRed", "primaryBlack"],
+    },
+  },
+  { timestamps: true }
+);
+
 const userSchema = new Schema(
   {
     username: {
@@ -40,6 +55,7 @@ const userSchema = new Schema(
       type: Date,
       default: Date.now(),
     },
+    profile: profileSchema,
   },
   { timestamps: true }
 );

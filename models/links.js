@@ -19,7 +19,7 @@ const linkSchema = new Schema(
       min: 5,
       max: 50,
     },
-    catgory: {
+    category: {
       required: true,
       type: Schema.Types.ObjectId,
       ref: "Category",

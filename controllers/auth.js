@@ -2,7 +2,7 @@ const User = require("../models/user");
 const { validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const { SECRET: secret } = require("../config/index");
+const { cookieKey: secret } = require("../config/keys");
 var getIP = require("ipware")().get_ip;
 //signup function
 const signUp = async (req, res) => {
@@ -119,6 +119,12 @@ const getAllUsers = async (req, res) => {
     data: users,
   });
 };
+
+//check if username is valid
+function CheckValid(username) {
+  re = /^\S+$/g;
+  return re.test(username);
+}
 
 module.exports = {
   signUp,

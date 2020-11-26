@@ -1,2 +1,5 @@
 node_modules 
-env
+.env
+error.js
+/config/dev.js
+client/node_modules

@@ -3,3 +3,4 @@ node_modules
 error.js
 /config/dev.js
 client/node_modules
+/cutoutfacts.js

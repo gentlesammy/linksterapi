@@ -31,6 +31,10 @@ mongoose.connect(
 
 app.use(passport.initialize());
 userLoggedIn(passport);
+//welcome route
+app.get("/", (req, res) => {
+  res.send("WELCOME TO ATOZ LINKS");
+});
 //router links
 authRoutes(app);
 app.use(require("./middlewares/verifyUser")); //user logged in

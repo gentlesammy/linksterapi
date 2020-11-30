@@ -6,9 +6,12 @@ const {
   createLink,
   linkDetail,
   deleteLink,
+  updateLink,
 } = require("../../controllers/Dashboard/link");
 
-linkRoutes.get("/api/v1/dashboard/links", getAllLinks);
+//get all links
+linkRoutes.get("/links", getAllLinks);
+//create link
 linkRoutes.post(
   "/links",
   //validation
@@ -37,5 +40,10 @@ linkRoutes.post(
 
   createLink
 );
-
+//get specific link
+linkRoutes.get("/links/:linkId", linkDetail);
+//update link
+linkRoutes.put("/links/:linkId", updateLink);
+//delete link
+linkRoutes.delete("/links/:linkId", deleteLink);
 module.exports = linkRoutes;
